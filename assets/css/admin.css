@@ -1,0 +1,213 @@
+/**
+ * ACL Switchboard — Admin Styles
+ *
+ * Minimal styling that complements WordPress admin defaults.
+ * Avoids overriding core styles; adds only what's needed for
+ * plugin-specific UI elements.
+ */
+
+/* -------------------------------------------------------------------------
+   Layout
+   ------------------------------------------------------------------------- */
+
+.acl-switchboard-wrap {
+	max-width: 1100px;
+}
+
+.acl-switchboard-tagline {
+	font-size: 14px;
+	color: #646970;
+	margin-top: -0.5em;
+}
+
+/* -------------------------------------------------------------------------
+   Status Cards (Dashboard)
+   ------------------------------------------------------------------------- */
+
+.acl-switchboard-cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 20px 0;
+}
+
+.acl-switchboard-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 16px 24px;
+	min-width: 160px;
+	flex: 1;
+}
+
+.acl-switchboard-card h3 {
+	font-size: 32px;
+	margin: 0 0 4px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.acl-switchboard-card p {
+	margin: 0;
+	color: #646970;
+	font-size: 13px;
+}
+
+.acl-switchboard-card--warning {
+	border-left: 4px solid #dba617;
+}
+
+/* -------------------------------------------------------------------------
+   Status Badges
+   ------------------------------------------------------------------------- */
+
+.acl-status-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.6;
+}
+
+.acl-status--active {
+	background: #d4edda;
+	color: #155724;
+}
+
+.acl-status--disabled {
+	background: #e9ecef;
+	color: #495057;
+}
+
+.acl-status--unmapped {
+	background: #fff3cd;
+	color: #856404;
+}
+
+.acl-status--missing {
+	background: #f8d7da;
+	color: #721c24;
+}
+
+/* -------------------------------------------------------------------------
+   Providers Table
+   ------------------------------------------------------------------------- */
+
+.acl-switchboard-providers-table .column-name {
+	width: 22%;
+}
+
+.acl-switchboard-providers-table .column-status {
+	width: 10%;
+}
+
+.acl-switchboard-providers-table .column-services {
+	width: 28%;
+}
+
+.acl-switchboard-providers-table .column-apikey {
+	width: 16%;
+}
+
+.acl-switchboard-providers-table .column-actions {
+	width: 24%;
+}
+
+/* -------------------------------------------------------------------------
+   Masked API Key
+   ------------------------------------------------------------------------- */
+
+.acl-masked-key {
+	font-family: monospace;
+	font-size: 12px;
+	color: #646970;
+	letter-spacing: 0.5px;
+	background: #f0f0f1;
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
+/* -------------------------------------------------------------------------
+   Connection Test Result
+   ------------------------------------------------------------------------- */
+
+.acl-test-result {
+	display: inline-block;
+	margin-left: 8px;
+	font-size: 13px;
+}
+
+.acl-test-result.acl-test--success {
+	color: #155724;
+}
+
+.acl-test-result.acl-test--error {
+	color: #721c24;
+}
+
+.acl-test-result.acl-test--loading {
+	color: #646970;
+	font-style: italic;
+}
+
+/* -------------------------------------------------------------------------
+   Empty State
+   ------------------------------------------------------------------------- */
+
+.acl-switchboard-empty-state {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 40px;
+	text-align: center;
+	margin: 20px 0;
+}
+
+.acl-switchboard-empty-state p {
+	font-size: 14px;
+	color: #646970;
+	margin-bottom: 16px;
+}
+
+/* -------------------------------------------------------------------------
+   Info Box
+   ------------------------------------------------------------------------- */
+
+.acl-switchboard-info-box {
+	background: #f0f6fc;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #2271b1;
+	border-radius: 4px;
+	padding: 16px 20px;
+	margin: 20px 0;
+}
+
+.acl-switchboard-info-box h3 {
+	margin-top: 0;
+}
+
+.acl-switchboard-info-box pre {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	padding: 12px;
+	overflow-x: auto;
+	font-size: 12px;
+}
+
+.acl-switchboard-info-box code {
+	font-size: 12px;
+}
+
+/* -------------------------------------------------------------------------
+   Form adjustments
+   ------------------------------------------------------------------------- */
+
+.acl-switchboard-wrap .form-table th {
+	width: 200px;
+}
+
+.acl-switchboard-wrap select.regular-text {
+	max-width: 400px;
+	width: 100%;
+}
