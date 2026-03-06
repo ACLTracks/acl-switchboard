@@ -78,7 +78,8 @@ class Provider_Store {
 	 * @return bool Whether the save was successful.
 	 */
 	public function save( string $slug, array $data, bool $skip_encrypt = false ): bool {
-		$all = $this->get_all();
+		$all_before = $this->get_all();
+		$all        = $all_before;
 
 		// Ensure required keys exist with defaults.
 		$data = wp_parse_args( $data, array(
@@ -113,16 +114,19 @@ class Provider_Store {
 		}
 
 		$all[ $slug ] = $data;
+		$unchanged    = ( $all === $all_before );
 
 		$result = update_option( self::OPTION_KEY, $all, true );
 
-		// Always update cache to the intended state regardless of $result.
-		// update_option() returns false both for genuine DB errors AND when
-		// the value is unchanged. In the unchanged case the DB already holds
-		// $all, so the cache is correct. In the error case, the cache may
-		// drift from DB state, but nulling it would cause a re-read that
-		// returns the old data anyway — no better outcome.
-		$this->cache = $all;
+		if ( $result || $unchanged ) {
+			// update_option() also returns false when no DB write is needed.
+			// In that unchanged case the DB already contains $all.
+			$this->cache = $all;
+		} else {
+			// Real write failure: invalidate cache so callers re-read DB state.
+			$this->cache = null;
+			return false;
+		}
 
 		/**
 		 * Fires after a provider configuration is saved.
@@ -132,7 +136,7 @@ class Provider_Store {
 		 */
 		do_action( 'acl_switchboard_provider_saved', $slug, $data );
 
-		return $result;
+		return true;
 	}
 
 	/**
@@ -142,18 +146,23 @@ class Provider_Store {
 	 * @return bool Whether the deletion was successful.
 	 */
 	public function delete( string $slug ): bool {
-		$all = $this->get_all();
+		$all_before = $this->get_all();
+		$all        = $all_before;
 
 		if ( ! isset( $all[ $slug ] ) ) {
 			return false;
 		}
 
 		unset( $all[ $slug ] );
+		$unchanged = ( $all === $all_before );
 
 		$result = update_option( self::OPTION_KEY, $all, true );
 
-		// Always update cache to match intended state (see save() comment).
-		$this->cache = $all;
+		if ( $result || $unchanged ) {
+			$this->cache = $all;
+		} else {
+			$this->cache = null;
+		}
 
 		return $result;
 	}
