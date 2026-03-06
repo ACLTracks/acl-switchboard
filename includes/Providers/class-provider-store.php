@@ -136,7 +136,7 @@ class Provider_Store {
 		 */
 		do_action( 'acl_switchboard_provider_saved', $slug, $data );
 
-		return $result;
+		return true;
 	}
 
 	/**
